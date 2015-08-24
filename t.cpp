@@ -1,3 +1,8 @@
+#ifdef __MAC_10_0
+    #include <unistd.h>
+#endif
+
+
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
@@ -7,7 +12,7 @@
 #include <netdb.h>
 #include <vector>
 
-
+#include <unistd.h>
 #include <exception>
 #include <iostream>
 #include <string>
@@ -95,7 +100,7 @@ int main()
 	gpio22.close();
 };
 
-
+/*
 int main2(int argc, char *argv[])
 {
 
@@ -148,3 +153,4 @@ int main2(int argc, char *argv[])
 //error(argv[0]);
 return 0;
 }
+ */

@@ -1,0 +1,159 @@
+
+
+
+<style>
+
+
+.Button
+{
+    background-color:#D94A38;
+    color:white;
+    line-height:120px;
+    text-align:center;
+    text-shadow:2 0 3px #000000;
+    font-variant: small-caps;
+    font-size:150%;
+}
+
+#rightButton
+{
+    position: fixed;
+    
+    /* center the element */
+    right: 0;
+    left: 50%;
+    top:50%;
+    margin-right: auto;
+    margin-left: auto;
+    /* give it dimensions */
+        width: 25%;
+}
+#leftButton
+{
+    position: fixed;
+   
+    /* center the element */
+    right: 50%;
+    left: 0;
+    top:50%;
+    margin-right: auto;
+    margin-left: auto;
+    /* give it dimensions */
+    
+    width: 25%;
+
+   
+}
+
+
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+#section {
+    
+
+
+        position: fixed;
+        /* center the element */
+        right: 0;
+        left: 0;
+        top:50%;
+        text-align:center;
+        background-color:darkred;
+        margin-right: auto;
+        margin-left: auto;
+        /* give it dimensions */
+        min-width:10%;
+        width: 25%;
+    
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+
+
+
+</style>
+
+
+
+
+<!DOCTYPE html>
+<head>
+   
+    
+       </head>
+<html>
+    <body>
+        <script>
+            
+            
+            function ajaxFunction(cmd){
+                
+                
+                var xmlhttp=new XMLHttpRequest();
+                //document.getElementById("myDiv").innerHTML=xmlhttp.readyState;
+                xmlhttp.onreadystatechange=function()
+                {
+                    
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                        document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                    }
+                }
+                
+                
+                
+                xmlhttp.open("POST",cmd,true);
+                xmlhttp.send();
+            }
+        
+        function mDown(obj)
+        {
+            obj.style.backgroundColor = "#d940000";
+            obj.innerHTML = "RELEASE ME";
+            obj.style.top="49%";
+            ajaxFunction(obj.getAttribute('value'));
+        }
+        
+        function mUp(obj)
+        {
+            obj.style.backgroundColor="#D94A38";
+            obj.innerHTML=obj.getAttribute('value');
+            obj.style.top="50%";
+            ajaxFunction("/STOP");
+        }
+        
+            </script>
+
+        
+        <div id="myDiv"> test</div>
+
+        <div class="Button" id="leftButton" onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseleave="mUp(this)" ontouchstart="mDown(this)" ontouchstop="mUp(this)" value="LEFT">LEFT</div>
+        
+         <div class="Button" id="section" onmousedown="mDown(this)" onmouseup="mUp(this)"  onmouseleave="mUp(this)" ontouchstart="mDown(this)" ontouchstop="mUp(this)" value="FORWARD">FORWARD</div>
+         
+        <div class="Button" id="rightButton" onmousedown="mDown(this)" onmouseup="mUp(this)"  onmouseleave="mUp(this)" ontouchstart="mDown(this)" ontouchstop="mUp(this)" value="RIGHT">RIGHT</div>
+       <script>
+           
+      
+      
+      
+        </script>
+    </body>
+</html>

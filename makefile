@@ -3,6 +3,7 @@ a.out : libgpio.a t.cpp Gpio.h
 libgpio.a : Gpio.o
 	ar rsc libgpio.a Gpio.o
 Gpio.o : Gpio.cpp Gpio.h
-	g++ -c Gpio.cpp 
+	
+	g++ -c Gpio.cpp  
 clean : 
 	rm *.o *.a

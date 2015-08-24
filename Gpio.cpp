@@ -20,6 +20,11 @@
 #include "Gpio.h"
 
 
+#ifdef __MAC_10_0
+#include <thread>
+#include <chrono>
+#endif
+
 bool Gpio::isCreated(char * tab) 
 {
 
@@ -40,7 +45,7 @@ bool Gpio::setDirection(direction direct)
 
 	directionFile.open(buffer);
 
-	if (directionFile < 0 )
+    if (directionFile.fail() )
 		{	
 			return false;			
 		}
@@ -86,7 +91,7 @@ bool Gpio::open()
 	
 	
 	
-	if(exportgpio <0)
+	if(exportgpio.fail())
 	{
 	 printf("ERROR");
 	 return false;
@@ -95,7 +100,15 @@ bool Gpio::open()
 	
 	exportgpio.close();
 //	usleep(2000000);
-	usleep(50000);
+    
+    #ifdef __MAC_10_0
+    
+    std::this_thread::sleep_for (std::chrono::seconds(5));
+    
+    #else
+    usleep(50000);
+    #endif
+	
 	this->setDirection(this->direct);
 
 	return true;
@@ -114,7 +127,7 @@ bool Gpio::close()
 
 	std::ofstream unexportgpio(UNEXPORT_PATH.c_str());
 
-	if(unexportgpio <0)
+	if(unexportgpio.fail())
 	{
 		printf("ERROR");
 		return false;
@@ -139,7 +152,7 @@ bool Gpio::setValue(int value)
 
 	std::ofstream valueFile(buffor);
 
-	if(valueFile<0)
+	if(valueFile.fail())
 		printf("ERROR");
 	
 	valueFile << value;
