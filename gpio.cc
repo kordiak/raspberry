@@ -22,12 +22,7 @@
 #include <sstream>
 
 
-/*
-#ifdef __MAC_10_0
-#include <thread>
-#include <chrono>
-#endif
-*/
+
 bool Gpio::isCreated(char * tab)
 {
     
@@ -84,8 +79,8 @@ bool Gpio::open()
     char tab[256];
     sprintf(tab,"%d",number);
     
-    ///if(this->isCreated(tab))
-     //   throw new std::string("auc");
+//    if(this->isCreated(tab))
+  //     throw new std::string("auc");
     
     //TODO : EXCEPTION
     
@@ -180,8 +175,8 @@ void move(const FunctionCallbackInfo<Value>& args) {
     gpio27.open();
     gpio22.open();
     
-    gpio27.close();
-    gpio22.close();
+    //gpio27.close();
+    //gpio22.close();
     
     
 
@@ -189,6 +184,14 @@ void move(const FunctionCallbackInfo<Value>& args) {
 }
 void stop(const FunctionCallbackInfo<Value>& args)
 {
+	Gpio gpio27(27,Gpio::out);
+    	Gpio gpio22(22,Gpio::out);
+
+
+
+	gpio27.close();
+	gpio22.close();
+
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
     args.GetReturnValue().Set(String::NewFromUtf8(isolate,"Stoping"));
