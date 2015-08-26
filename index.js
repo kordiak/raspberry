@@ -2,13 +2,20 @@
 
 
 var http=require('http');
-var gpio=require('./build/Release/gpio');
+//var gpio=require('./build/Release/gpio');
+var addon=require('./build/Release/addon');
 
 
 
 
+var obj = new addon.MyObject(10);
+//console.log( obj.plusOne() ); // 11
+//console.log( obj.plusOne() ); // 12
+//console.log( obj.plusOne() ); // 13
 
-console.log('%s %s',gpio.move(),gpio.stop());
+
+//obj.close()
+//console.log('%s %s',gpio.move(),gpio.stop());
 
 var http = require('http'),
     fs = require('fs');
@@ -30,17 +37,18 @@ var proces=function(request,response)
 console.log(request.url);
 if(request.url=="/RIGHT")
 {
-	
+	obj.close();
 	response.writeHead(200, {"Content-Type": "text/plain"});
-       	response.end(gpio.right());
+       	response.end("Turining right");
             
 	return 0;
 }
 else
     if(request.url=="/LEFT")
             {
+	    obj.left();
             response.writeHead(200,{"Content-Type": "text/plain"});
-            response.end(gpio.left());
+            response.end("Turning left");
             return 0;
             }
             else if(request.url=="/FORWARD")
@@ -53,7 +61,7 @@ else
             else if(request.url=="/STOP")
             {
             response.writeHead(200,{"Content-Type": "text/plain"});
-            response.end(gpio.stop());
+            response.end("STOPING");
             return 0;
 
             }
@@ -68,3 +76,5 @@ response.writeHead(200, {'Content-Type': 'text/html'});
 http.createServer(proces).listen(80,'0.0.0.0');
 
 });
+
+

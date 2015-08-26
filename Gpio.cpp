@@ -20,10 +20,10 @@
 #include "Gpio.h"
 
 
-#ifdef __MAC_10_0
+
 #include <thread>
 #include <chrono>
-#endif
+
 
 bool Gpio::isCreated(char * tab) 
 {
@@ -40,17 +40,18 @@ bool Gpio::setDirection(direction direct)
 	char buffer[256];
 
 	sprintf(buffer,"%s/direction",whole);
+	printf("%s",buffer);
 	std::ofstream directionFile;
 	
 
 	directionFile.open(buffer);
 
-    if (directionFile.fail() )
+    if (directionFile.fail())
 		{	
 			return false;			
 		}
 
-	
+	printf("SETTING DIRECTION\n");
 
 	switch(direct)
 	{
@@ -76,13 +77,14 @@ Gpio::Gpio(int number,Gpio::direction direct,std::ofstream * exportHandler,std::
 bool Gpio::open()
 {
 
-	//printf("OPENING\n");
+	printf("OPENING\n");
 
 	char tab[256];
 	sprintf(tab,"%d",number);
 
 	if(this->isCreated(tab))
-		throw new std::string("auc");
+		printf("already exist\n");
+//		throw new std::string("auc");
 
 	//TODO : EXCEPTION
 	
@@ -99,15 +101,8 @@ bool Gpio::open()
 	exportgpio << tab;
 	
 	exportgpio.close();
-//	usleep(2000000);
-    
-    #ifdef __MAC_10_0
-    
-    std::this_thread::sleep_for (std::chrono::seconds(5));
-    
-    #else
-    usleep(50000);
-    #endif
+
+	std::this_thread::sleep_for (std::chrono::seconds(5));
 	
 	this->setDirection(this->direct);
 
