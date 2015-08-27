@@ -7,12 +7,19 @@
 .Button
 {
     background-color:#D94A38;
-    color:white;
+    color:lightgreen;
     line-height:120px;
     text-align:center;
     text-shadow:2 0 3px #000000;
     font-variant: small-caps;
     font-size:150%;
+    
+}
+.cmd
+{
+    border-color:blue;
+    color:red;
+    linearRGB:#235050;
 }
 
 #rightButton
@@ -34,7 +41,7 @@
    
     /* center the element */
     right: 50%;
-    left: 0;
+    left: 0%;
     top:50%;
     margin-right: auto;
     margin-left: auto;
@@ -43,6 +50,31 @@
     width: 25%;
 
    
+}
+#onButton
+{
+    position:fixed;
+    top:10%;
+    left:20%;
+    right:20%;
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+#offButton
+{
+    position:fixed;
+    top:30%;
+    left:15%;
+    right:15%;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+#body
+{
+    background-color:black;
+    color:#00ff00;
 }
 
 
@@ -99,7 +131,7 @@
     
        </head>
 <html>
-    <body>
+    <body id="body">
         <script>
             
             
@@ -125,7 +157,7 @@
         
         function mDown(obj)
         {
-            obj.style.backgroundColor = "#d940000";
+            obj.style.backgroundColor = "#D93020";
             obj.innerHTML = "RELEASE ME";
             obj.style.top="49%";
             ajaxFunction(obj.getAttribute('value'));
@@ -143,14 +175,18 @@
 
         
         <div id="myDiv"> test</div>
-
-        <div class="Button" id="leftButton" onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseleave="mUp(this)" ontouchstart="mDown(this)" ontouchstop="mUp(this)" value="LEFT">LEFT</div>
+<hr class="cmd">
+        <div class="Button" id="leftButton" onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseleave="mUp(this)" ontouchstart="mDown(this)" ontouchstop="mUp(this)" value="LEFT" >LEFT</div>
         
          <div class="Button" id="section" onmousedown="mDown(this)" onmouseup="mUp(this)"  onmouseleave="mUp(this)" ontouchstart="mDown(this)" ontouchstop="mUp(this)" value="FORWARD">FORWARD</div>
          
         <div class="Button" id="rightButton" onmousedown="mDown(this)" onmouseup="mUp(this)"  onmouseleave="mUp(this)" ontouchstart="mDown(this)" ontouchstop="mUp(this)" value="RIGHT">RIGHT</div>
+        
+          <div class="Button" id="onButton">OPEN</div>
+          <div class="Button" id="offButton">CLOSE</div>
        <script>
            
+      
       
       
       
