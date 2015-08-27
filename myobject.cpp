@@ -33,6 +33,10 @@ void MyObject::Init(Handle<Object> exports) {
 	NODE_SET_PROTOTYPE_METHOD(tpl, "plusOne", PlusOne);
 	NODE_SET_PROTOTYPE_METHOD(tpl,"close",close);	
 	NODE_SET_PROTOTYPE_METHOD(tpl,"left",left);
+	NODE_SET_PROTOTYPE_METHOD(tpl,"right",right);
+	NODE_SET_PROTOTYPE_METHOD(tpl,"stop",stop);
+	NODE_SET_PROTOTYPE_METHOD(tpl,"forward",forward);
+
   constructor.Reset(isolate, tpl->GetFunction());
   exports->Set(String::NewFromUtf8(isolate, "MyObject"),
                tpl->GetFunction());
@@ -86,11 +90,42 @@ void MyObject::left(const FunctionCallbackInfo<Value>& args)
 
 	MyObject *obj=ObjectWrap::Unwrap<MyObject>(args.Holder());
 
-	usleep(500000);
-	obj->leftPort.setValue(1);
-	obj->rightPort.setValue(0);
-
-
 	
+	obj->leftPort.setValue(0);
+	obj->rightPort.setValue(1);
 	
 }
+void MyObject::right(const FunctionCallbackInfo<Value>& args)
+{
+	Isolate* isolate=Isolate::GetCurrent();
+	HandleScope scope(isolate);
+
+	MyObject *obj=ObjectWrap::Unwrap<MyObject>(args.Holder());
+	obj->leftPort.setValue(1);
+	obj->rightPort.setValue(0);
+	
+}
+
+void MyObject::stop(const FunctionCallbackInfo<Value>& args)
+{
+	Isolate* isolate=Isolate::GetCurrent();
+	HandleScope scope(isolate);
+
+	MyObject *obj=ObjectWrap::Unwrap<MyObject>(args.Holder());
+
+	obj->leftPort.setValue(0);
+	obj->rightPort.setValue(0);
+}
+
+void MyObject::forward(const FunctionCallbackInfo<Value>& args)
+{
+        Isolate* isolate=Isolate::GetCurrent();
+        HandleScope scope(isolate);
+
+        MyObject *obj=ObjectWrap::Unwrap<MyObject>(args.Holder());
+
+        obj->leftPort.setValue(1);
+        obj->rightPort.setValue(1);
+}
+
+

@@ -37,7 +37,8 @@ var proces=function(request,response)
 console.log(request.url);
 if(request.url=="/RIGHT")
 {
-	obj.close();
+	//obj.close();
+	obj.right();
 	response.writeHead(200, {"Content-Type": "text/plain"});
        	response.end("Turining right");
             
@@ -53,6 +54,8 @@ else
             }
             else if(request.url=="/FORWARD")
             {
+		//obj.close();
+		obj.forward();
             response.writeHead(200,{"Content-Type": "text/plain"});
             response.end("Moving forward");
             return 0;
@@ -60,11 +63,19 @@ else
             }
             else if(request.url=="/STOP")
             {
+		obj.stop();
             response.writeHead(200,{"Content-Type": "text/plain"});
             response.end("STOPING");
             return 0;
 
             }
+		else if(request.url=="/CLOSE")
+		{	
+		obj.close();
+		response.writeHead(200,{"Content-Type": "text/plain"});
+		response.end("CLOSED");
+		return 0;	
+		}
             
 response.writeHead(200, {'Content-Type': 'text/html'});
     	response.write(html);
