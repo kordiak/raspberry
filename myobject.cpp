@@ -36,7 +36,7 @@ void MyObject::Init(Handle<Object> exports) {
 	NODE_SET_PROTOTYPE_METHOD(tpl,"right",right);
 	NODE_SET_PROTOTYPE_METHOD(tpl,"stop",stop);
 	NODE_SET_PROTOTYPE_METHOD(tpl,"forward",forward);
-
+	NODE_SET_PROTOTYPE_METHOD(tpl,"open",open);
   constructor.Reset(isolate, tpl->GetFunction());
   exports->Set(String::NewFromUtf8(isolate, "MyObject"),
                tpl->GetFunction());
@@ -80,8 +80,21 @@ void MyObject::close(const FunctionCallbackInfo<Value>& args)
 	
 	MyObject* obj = ObjectWrap::Unwrap<MyObject>(args.Holder());	
 
-	obj->leftPort.close();
-	obj->rightPort.close();
+	if(obj->leftPort.close() && obj->rightPort.close())
+	{
+		args.GetReturnValue().Set(String::NewFromUtf8(isolate, "OK"));
+	}
+	else
+		args.GetReturnValue().Set(String::NewFromUtf8(isolate, "ERROR - OPENING"));
+}
+void MyObject::open(const FunctionCallbackInfo<Value>& args)
+{
+	Isolate* isolate=Isolate::GetCurrent();
+	HandleScope scope(isolate);
+
+	MyObject *obj=ObjectWrap::Unwrap<MyObject>(args.Holder());
+	obj->leftPort.open();
+	obj->rightPort.open();
 }
 void MyObject::left(const FunctionCallbackInfo<Value>& args)
 {

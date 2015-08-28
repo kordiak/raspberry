@@ -16,6 +16,7 @@ static void Init(v8::Handle<v8::Object> exports);
   static void New(const v8::FunctionCallbackInfo<v8::Value>& args);
   static void PlusOne(const v8::FunctionCallbackInfo<v8::Value>& args);
  static void close(const v8::FunctionCallbackInfo<v8::Value>& args);
+static void open(const v8::FunctionCallbackInfo<v8::Value>& args);
 static void left(const v8::FunctionCallbackInfo<v8::Value>& args);
 static void right(const v8::FunctionCallbackInfo<v8::Value>& args);
 static void stop(const v8::FunctionCallbackInfo<v8::Value>& args); 

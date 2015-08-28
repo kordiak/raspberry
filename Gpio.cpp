@@ -78,7 +78,7 @@ bool Gpio::open()
 {
 
 	printf("OPENING\n");
-
+	std::cout << "OPE";
 	char tab[256];
 	sprintf(tab,"%d",number);
 

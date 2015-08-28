@@ -76,6 +76,14 @@ else
 		response.end("CLOSED");
 		return 0;	
 		}
+	   else if(request.url=="/OPEN")
+	{
+		response.writeHead(200,{"Content-Type":"text/plain"});
+		response.end(obj.open());
+		
+		//obj.open();
+		return 0;	
+	}		
             
 response.writeHead(200, {'Content-Type': 'text/html'});
     	response.write(html);
