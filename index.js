@@ -2,20 +2,13 @@
 
 
 var http=require('http');
-//var gpio=require('./build/Release/gpio');
+
 var addon=require('./build/Release/addon');
 
 
 
 
 var obj = new addon.MyObject(10);
-//console.log( obj.plusOne() ); // 11
-//console.log( obj.plusOne() ); // 12
-//console.log( obj.plusOne() ); // 13
-
-
-//obj.close()
-//console.log('%s %s',gpio.move(),gpio.stop());
 
 var http = require('http'),
     fs = require('fs');
@@ -89,7 +82,7 @@ response.writeHead(200, {'Content-Type': 'text/html'});
     	response.write(html);
 	response.end();
             }
-    	//response.end('<html><body><center><h1>Ucz sie a nie wizaze ogladaj!!!</h1></center></body></html>')
+    
 
 
 http.createServer(proces).listen(80,'0.0.0.0');
